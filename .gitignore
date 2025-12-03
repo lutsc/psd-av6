@@ -1,0 +1,24 @@
+*.txt
+*.pdf
+*.pdf#
+*.zip
+
+# Visual Studio Code
+.vs/
+
+# ModelSim
+work/
+*.vstf
+*.wlf
+
+# Quartus Prime
+db/
+incremental_db/
+output_files/
+simulation/
+*.qar
+*.qarlog
+*.qpf
+*.qsf
+*.qws
+*.rpt
