@@ -1,10 +1,16 @@
-*.txt
+# Genérico
 *.pdf
 *.pdf#
+*.txt
 *.zip
 
 # Visual Studio Code
 .vs/
+
+# C/C++
+*.c
+*.cpp
+*.o
 
 # ModelSim
 work/

@@ -1,17 +1,16 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity mdc_controller is port(
+entity mdc_control is port(
   i_CLK : in std_logic;
-  i_RDY : in std_logic;
   i_GO  : in std_logic;
-  i_SEL  : in std_logic;
-  i_X  : in std_logic;
-  i_Y  : in std_logic;
-  o_D : out std_logic);
+  i_X   : in std_logic_vector(7 downto 0);
+  i_Y   : in std_logic_vector(7 downto 0);
+  o_RDY : out std_logic;
+  o_D   : out std_logic_vector(7 downto 0));
 end entity;
 
-architecture arch_controller of mdc_controller is
+architecture arch_control of mdc_control is
   
   type t_STATE is (s_0, s_1, s_2, s_3, s_4, s_5, s_6); -- estados: 
   signal r_STATE : t_STATE := s_0;                     -- estado atual (inicializado)
@@ -48,11 +47,11 @@ begin
   --   end if;
 
   when s_3 => 
-    if (i_SEL = '0') then
+    -- if (i_SEL = '0') then
       w_NEXT <= s_4;
-    else 
-      w_NEXT <= s_5;
-    end if;
+    -- else 
+    --   w_NEXT <= s_5;
+    -- end if;
   
   when s_4 => w_NEXT <= s_2;
   
