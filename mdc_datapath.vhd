@@ -19,10 +19,7 @@ end entity;
 
 architecture arch_datapath of mdc_datapath is
 
-  component mux is port(
-    i_CLR_n : in std_logic;
-    i_CLK   : in std_logic;
-    i_ENA   : in std_logic;
+  component mux_2x1 is port(
     i_SEL   : in std_logic;
     i_A     : in std_logic_vector(7 downto 0);
     i_B     : in std_logic_vector(7 downto 0);
@@ -52,51 +49,60 @@ architecture arch_datapath of mdc_datapath is
   end component;
 
   signal w_X, w_Y : std_logic_vector(7 downto 0);
+  signal w_MUX_X, w_MUX_Y : std_logic_vector(7 downto 0);
   signal w_SUB_X, w_SUB_Y : std_logic_vector(7 downto 0);
 
 begin
 
-  u_MUX_X : mux port map(
-    i_CLR_n => i_CLR_n, 
-    i_CLK => i_CLK, 
-    i_ENA => i_ENA_X, 
-    i_SEL => i_SEL_X,
-    i_A => i_X,
-    i_B => w_SUB_X,
-    o_S => w_X);
+  u_MUX_X : mux_2x1 port map(
+    i_SEL   => i_SEL_X,
+    i_A     => i_X,
+    i_B     => w_SUB_X,
+    o_S     => w_MUX_X);
 
 
-  u_MUX_Y : mux port map(
-    i_CLR_n => i_CLR_n, 
-    i_CLK => i_CLK, 
-    i_ENA => i_ENA_Y, 
-    i_SEL => i_SEL_Y,
-    i_A => i_Y,
-    i_B => w_SUB_Y,
-    o_S => w_Y);
+  u_MUX_Y : mux_2x1 port map(
+    i_SEL   => i_SEL_Y,
+    i_A     => i_Y,
+    i_B     => w_SUB_Y,
+    o_S     => w_MUX_Y);
 
+  u_REG_X : reg_8bit port map(
+    i_CLR_n => i_CLR_n,
+    i_CLK   => i_CLK,
+    i_ENA   => i_ENA_X,
+    i_Q     => w_MUX_X,
+    o_S     => w_X);
+
+  u_REG_Y : reg_8bit port map(
+    i_CLR_n => i_CLR_n,
+    i_CLK   => i_CLK,
+    i_ENA   => i_ENA_Y,
+    i_Q     => w_MUX_Y,
+    o_S     => w_Y);
+    
   u_COMPARATOR : comparator port map(
-    i_X => i_X,
-    i_Y => i_Y,
+    i_X  => w_X,
+    i_Y  => w_Y,
     o_GT => o_GT,
     o_EQ => o_EQ,
     o_LT => o_LT);
 
   u_SUBTRACTOR_X : subtractor port map(
-    i_A => i_X,
-    i_B => i_Y,
+    i_A => w_X,
+    i_B => w_Y,
     o_S => w_SUB_X);
 
   u_SUBTRACTOR_Y : subtractor port map(
-    i_A => i_Y,
-    i_B => i_X,
+    i_A => w_Y,
+    i_B => w_X,
     o_S => w_SUB_Y);
 
-  u_REG : reg_8bit port map(
+  u_REG_D : reg_8bit port map(
       i_CLR_n => i_CLR_n,
-      i_CLK => i_CLK,
-      i_ENA => i_ENA_D,
-      i_Q => w_X,
-      o_S => o_D);
+      i_CLK   => i_CLK,
+      i_ENA   => i_ENA_D,
+      i_Q     => w_X,
+      o_S     => o_D);
 
 end architecture;

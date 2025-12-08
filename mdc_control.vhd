@@ -27,7 +27,7 @@ begin
 -- Registrador de estados  
 p_STATE : process(i_CLR_n, i_CLK)
 begin
-  if (i_CLR_n = '1') then
+  if (i_CLR_n = '0') then
     r_STATE <= s_0;
   elsif (rising_edge(i_CLK)) then
     r_STATE <= w_NEXT;
@@ -35,7 +35,7 @@ begin
 end process;
 
 -- Transição de estados
-p_NEXT : process(r_STATE)
+p_NEXT : process(r_STATE, i_GO, i_GT, i_EQ, i_LT)
 begin
   case (r_STATE) is
   when s_0 => 
@@ -60,11 +60,11 @@ begin
     elsif (i_GT = '1') then
       w_NEXT <= s_5;
     end if;
-  
+
   when s_4 => w_NEXT <= s_2;
-  
+
   when s_5 => w_NEXT <= s_2;
-  
+
   when s_6 => w_NEXT <= s_0;
 
   when others => w_NEXT <= s_0;
@@ -88,8 +88,8 @@ begin
     o_RDY   <= '0';
     o_SEL_X <= '0';
     o_SEL_Y <= '0';
-    o_ENA_X <= '0';
-    o_ENA_Y <= '0';
+    o_ENA_X <= '1';
+    o_ENA_Y <= '1';
     o_ENA_D <= '0';
 
   when s_2 =>
@@ -110,18 +110,18 @@ begin
   
   when s_4 =>
     o_RDY   <= '0';
-    o_SEL_X <= '0';
+    o_SEL_X <= '1';
     o_SEL_Y <= '0';
-    o_ENA_X <= '0';
+    o_ENA_X <= '1';
     o_ENA_Y <= '0';
     o_ENA_D <= '0';
 
   when s_5 =>
     o_RDY   <= '0';
     o_SEL_X <= '0';
-    o_SEL_Y <= '0';
+    o_SEL_Y <= '1';
     o_ENA_X <= '0';
-    o_ENA_Y <= '0';
+    o_ENA_Y <= '1';
     o_ENA_D <= '0';
 
   when s_6 =>
@@ -130,8 +130,7 @@ begin
     o_SEL_Y <= '0';
     o_ENA_X <= '0';
     o_ENA_Y <= '0';
-    o_ENA_D <= '0';
- 
+    o_ENA_D <= '1';
   end case;
 end process;
 end architecture;
