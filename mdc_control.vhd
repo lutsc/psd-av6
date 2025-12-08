@@ -2,12 +2,18 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity mdc_control is port(
-  i_CLK : in std_logic;
-  i_GO  : in std_logic;
-  i_X   : in std_logic_vector(7 downto 0);
-  i_Y   : in std_logic_vector(7 downto 0);
-  o_RDY : out std_logic;
-  o_D   : out std_logic_vector(7 downto 0));
+  i_CLR_n : in std_logic;  
+  i_CLK   : in std_logic;
+  i_GO    : in std_logic;
+  i_GT    : in std_logic;
+  i_EQ    : in std_logic;
+  i_LT    : in std_logic;
+  o_SEL_X : out std_logic;
+  o_SEL_Y : out std_logic;
+  o_ENA_X : out std_logic;
+  o_ENA_Y : out std_logic;
+  o_ENA_D : out std_logic;
+  o_RDY   : out std_logic);
 end entity;
 
 architecture arch_control of mdc_control is
@@ -57,12 +63,14 @@ begin
   
   when s_5 => w_NEXT <= s_2;
   
+  when s_6 => w_NEXT <= s_0;
+
   when others => w_NEXT <= s_0;
 
   end case; 
 end process;
 
 -- Saída  
--- o_D <=  when (r_STATE = s_1 or r_STATE = s_2 or r_STATE = s_4) else '0';
-
+  -- o_D <= (others => '1') when (r_STATE = s_2 or r_STATE = s_4) else (others => '0');
+  o_RDY <= '1' when (r_STATE = s_0) else '0';
 end architecture;
