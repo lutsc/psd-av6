@@ -2,10 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity mux_2x1 is port(
-  i_SEL   : in std_logic;
-  i_A     : in std_logic_vector(7 downto 0);
-  i_B     : in std_logic_vector(7 downto 0);
-  o_S     : out std_logic_vector(7 downto 0));
+  i_SEL : in std_logic;
+  i_A   : in std_logic_vector(7 downto 0);
+  i_B   : in std_logic_vector(7 downto 0);
+  o_S   : out std_logic_vector(7 downto 0));
 end entity;
 
 architecture arch_mux_2x1 of mux_2x1 is

@@ -2,20 +2,20 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity mdc_control is port(
-  i_CLR_n     : in std_logic;  
-  i_CLK       : in std_logic;
-  i_GO        : in std_logic;
-  i_GT        : in std_logic;
-  i_EQ        : in std_logic;
-  i_LT        : in std_logic;
-  o_SEL_X     : out std_logic;
-  o_SEL_Y     : out std_logic;
-  o_ENA_X     : out std_logic;
-  o_ENA_Y     : out std_logic;
-  o_ENA_D     : out std_logic;
-  i_ENA_SUB_X : out std_logic;
-  i_ENA_SUB_Y : out std_logic;
-  o_RDY       : out std_logic);
+  i_CLR_n   : in std_logic;
+  i_CLK     : in std_logic;
+  i_GO      : in std_logic;
+  i_GT      : in std_logic;
+  i_EQ      : in std_logic;
+  i_LT      : in std_logic;
+  o_ENA_X   : out std_logic;
+  o_ENA_Y   : out std_logic;
+  o_ENA_SUB : out std_logic;
+  o_ENA_D   : out std_logic;
+  o_SEL_X   : out std_logic;
+  o_SEL_Y   : out std_logic;
+  o_SEL_SUB : out std_logic;
+  o_RDY     : out std_logic);
 end entity;
 
 architecture arch_control of mdc_control is
@@ -81,84 +81,84 @@ p_OUTPUT : process(r_STATE)
 begin
   case (r_STATE) is
   when s_0 => 
-    o_RDY       <= '1';
-    o_SEL_X     <= '0';
-    o_SEL_Y     <= '0';
-    o_ENA_X     <= '0';
-    o_ENA_Y     <= '0';
-    o_ENA_D     <= '0';
-    i_ENA_SUB_X <= '0';
-    i_ENA_SUB_Y <= '0';
+    o_RDY     <= '1';
+    o_SEL_X   <= '0';
+    o_SEL_Y   <= '0';
+    o_SEL_SUB <= '0';
+    o_ENA_X   <= '0';
+    o_ENA_Y   <= '0';
+    o_ENA_SUB <= '0';
+    o_ENA_D   <= '0';
 
   when s_1 =>
-    o_RDY       <= '0';
-    o_SEL_X     <= '0';
-    o_SEL_Y     <= '0';
-    o_ENA_X     <= '1';
-    o_ENA_Y     <= '1';
-    o_ENA_D     <= '0';
-    i_ENA_SUB_X <= '0';
-    i_ENA_SUB_Y <= '0';
+    o_RDY     <= '0';
+    o_SEL_X   <= '0';
+    o_SEL_Y   <= '0';
+    o_SEL_SUB <= '0';
+    o_ENA_X   <= '1';
+    o_ENA_Y   <= '1';
+    o_ENA_SUB <= '0';
+    o_ENA_D   <= '0';
 
   when s_2 =>
-    o_RDY       <= '0';
-    o_SEL_X     <= '0';
-    o_SEL_Y     <= '0';
-    o_ENA_X     <= '0';
-    o_ENA_Y     <= '0';
-    o_ENA_D     <= '0';
-    i_ENA_SUB_X <= '0';
-    i_ENA_SUB_Y <= '0';
+    o_RDY     <= '0';
+    o_SEL_X   <= '0';
+    o_SEL_Y   <= '0';
+    o_SEL_SUB <= '0';
+    o_ENA_X   <= '0';
+    o_ENA_Y   <= '0';
+    o_ENA_SUB <= '0';
+    o_ENA_D   <= '0';
 
   when s_3 =>
-    o_RDY       <= '0';
-    o_SEL_X     <= '0';
-    o_SEL_Y     <= '0';
-    o_ENA_X     <= '0';
-    o_ENA_Y     <= '0';
-    o_ENA_D     <= '0';
-    i_ENA_SUB_X <= '0';
-    i_ENA_SUB_Y <= '0';
+    o_RDY     <= '0';
+    o_SEL_X   <= '0';
+    o_SEL_Y   <= '0';
+    o_SEL_SUB <= '0';
+    o_ENA_X   <= '0';
+    o_ENA_Y   <= '0';
+    o_ENA_SUB <= '0';
+    o_ENA_D   <= '0';
 
   when s_4 =>
-    o_RDY       <= '0';
-    o_SEL_X     <= '1';
-    o_SEL_Y     <= '0';
-    o_ENA_X     <= '1';
-    o_ENA_Y     <= '0';
-    o_ENA_D     <= '0';
-    i_ENA_SUB_X <= '1';
-    i_ENA_SUB_Y <= '0';
+    o_RDY     <= '0';
+    o_SEL_X   <= '0';
+    o_SEL_Y   <= '1';
+    o_SEL_SUB <= '1';
+    o_ENA_X   <= '0';
+    o_ENA_Y   <= '1';
+    o_ENA_SUB <= '1';
+    o_ENA_D   <= '0';
 
   when s_5 =>
-    o_RDY       <= '0';
-    o_SEL_X     <= '0';
-    o_SEL_Y     <= '1';
-    o_ENA_X     <= '0';
-    o_ENA_Y     <= '1';
-    o_ENA_D     <= '0';
-    i_ENA_SUB_X <= '0';
-    i_ENA_SUB_Y <= '1';
+    o_RDY     <= '0';
+    o_SEL_X   <= '1';
+    o_SEL_Y   <= '0';
+    o_SEL_SUB <= '0';
+    o_ENA_X   <= '1';
+    o_ENA_Y   <= '0';
+    o_ENA_SUB <= '1';
+    o_ENA_D   <= '0';
 
   when s_6 =>
-    o_RDY       <= '0';
-    o_SEL_X     <= '0';
-    o_SEL_Y     <= '0';
-    o_ENA_X     <= '0';
-    o_ENA_Y     <= '0';
-    o_ENA_D     <= '1';
-    i_ENA_SUB_X <= '0';
-    i_ENA_SUB_Y <= '0';
+    o_RDY     <= '0';
+    o_SEL_X   <= '0';
+    o_SEL_Y   <= '0';
+    o_SEL_SUB <= '0';
+    o_ENA_X   <= '0';
+    o_ENA_Y   <= '0';
+    o_ENA_SUB <= '0';
+    o_ENA_D   <= '1';
 
   when others => 
-    o_RDY       <= '0';
-    o_SEL_X     <= '0';
-    o_SEL_Y     <= '0';
-    o_ENA_X     <= '0';
-    o_ENA_Y     <= '0';
-    o_ENA_D     <= '0';
-    i_ENA_SUB_X <= '0';
-    i_ENA_SUB_Y <= '0';
+    o_RDY     <= '0';
+    o_SEL_X   <= '0';
+    o_SEL_Y   <= '0';
+    o_SEL_SUB <= '0';
+    o_ENA_X   <= '0';
+    o_ENA_Y   <= '0';
+    o_ENA_SUB <= '0';
+    o_ENA_D   <= '0';
   end case;
 end process;
 end architecture;

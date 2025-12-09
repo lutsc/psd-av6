@@ -11,12 +11,14 @@ end entity;
 
 architecture arch_reg_8bit of reg_8bit is
 begin
-  process(i_CLR_n, i_CLK, i_ENA)
+  process(i_CLR_n, i_CLK)
   begin
     if (i_CLR_n = '0') then
       o_S <= (others => '0');
-    elsif (rising_edge(i_CLK) and i_ENA = '1') then
-      o_S <= i_Q;
+    elsif (rising_edge(i_CLK)) then
+      if (i_ENA = '1') then
+        o_S <= i_Q;
+      end if;
     end if;
   end process;
 end architecture;
