@@ -6,7 +6,6 @@ entity mdc_datapath is port(
   i_CLK     : in  std_logic;
   i_ENA_X   : in  std_logic;
   i_ENA_Y   : in  std_logic;
-  i_ENA_SUB : in  std_logic;
   i_ENA_D   : in  std_logic;
   i_SEL_X   : in  std_logic;
   i_SEL_Y   : in  std_logic;

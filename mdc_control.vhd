@@ -10,7 +10,6 @@ entity mdc_control is port(
   i_LT      : in std_logic;
   o_ENA_X   : out std_logic;
   o_ENA_Y   : out std_logic;
-  o_ENA_SUB : out std_logic;
   o_ENA_D   : out std_logic;
   o_SEL_X   : out std_logic;
   o_SEL_Y   : out std_logic;
@@ -87,7 +86,6 @@ begin
     o_SEL_SUB <= '0';
     o_ENA_X   <= '0';
     o_ENA_Y   <= '0';
-    o_ENA_SUB <= '0';
     o_ENA_D   <= '0';
 
   when s_1 =>
@@ -97,7 +95,6 @@ begin
     o_SEL_SUB <= '0';
     o_ENA_X   <= '1';
     o_ENA_Y   <= '1';
-    o_ENA_SUB <= '0';
     o_ENA_D   <= '0';
 
   when s_2 =>
@@ -107,7 +104,6 @@ begin
     o_SEL_SUB <= '0';
     o_ENA_X   <= '0';
     o_ENA_Y   <= '0';
-    o_ENA_SUB <= '0';
     o_ENA_D   <= '0';
 
   when s_3 =>
@@ -117,7 +113,6 @@ begin
     o_SEL_SUB <= '0';
     o_ENA_X   <= '0';
     o_ENA_Y   <= '0';
-    o_ENA_SUB <= '0';
     o_ENA_D   <= '0';
 
   when s_4 =>
@@ -127,7 +122,6 @@ begin
     o_SEL_SUB <= '1';
     o_ENA_X   <= '0';
     o_ENA_Y   <= '1';
-    o_ENA_SUB <= '1';
     o_ENA_D   <= '0';
 
   when s_5 =>
@@ -137,7 +131,6 @@ begin
     o_SEL_SUB <= '0';
     o_ENA_X   <= '1';
     o_ENA_Y   <= '0';
-    o_ENA_SUB <= '1';
     o_ENA_D   <= '0';
 
   when s_6 =>
@@ -147,7 +140,6 @@ begin
     o_SEL_SUB <= '0';
     o_ENA_X   <= '0';
     o_ENA_Y   <= '0';
-    o_ENA_SUB <= '0';
     o_ENA_D   <= '1';
 
   when others => 
@@ -157,7 +149,6 @@ begin
     o_SEL_SUB <= '0';
     o_ENA_X   <= '0';
     o_ENA_Y   <= '0';
-    o_ENA_SUB <= '0';
     o_ENA_D   <= '0';
   end case;
 end process;

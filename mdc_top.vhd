@@ -22,7 +22,6 @@ architecture arch_mdc_top of mdc_top is
     i_LT      : in std_logic;
     o_ENA_X   : out std_logic;
     o_ENA_Y   : out std_logic;
-    o_ENA_SUB : out std_logic;
     o_ENA_D   : out std_logic;
     o_SEL_X   : out std_logic;
     o_SEL_Y   : out std_logic;
@@ -35,7 +34,6 @@ architecture arch_mdc_top of mdc_top is
     i_CLK     : in  std_logic;
     i_ENA_X   : in  std_logic;
     i_ENA_Y   : in  std_logic;
-    i_ENA_SUB : in  std_logic;
     i_ENA_D   : in  std_logic;
     i_SEL_X   : in  std_logic;
     i_SEL_Y   : in  std_logic;
@@ -50,7 +48,7 @@ architecture arch_mdc_top of mdc_top is
 
   signal w_GT, w_EQ, w_LT : std_logic := '0';
   signal w_SEL_X, w_SEL_Y, w_SEL_SUB : std_logic := '0';
-  signal w_ENA_X, w_ENA_Y, w_ENA_SUB, w_ENA_D : std_logic := '0';
+  signal w_ENA_X, w_ENA_Y, w_ENA_D : std_logic := '0';
 
 begin
 
@@ -63,7 +61,6 @@ begin
     i_LT      => w_LT,
     o_ENA_X   => w_ENA_X,
     o_ENA_Y   => w_ENA_Y,
-    o_ENA_SUB => w_ENA_SUB,
     o_ENA_D   => w_ENA_D,
     o_SEL_X   => w_SEL_X,
     o_SEL_Y   => w_SEL_Y,
@@ -75,7 +72,6 @@ begin
     i_CLK     => i_CLK,
     i_ENA_X   => w_ENA_X,
     i_ENA_Y   => w_ENA_Y,
-    i_ENA_SUB => w_ENA_SUB,
     i_ENA_D   => w_ENA_D,
     i_SEL_X   => w_SEL_X,
     i_SEL_Y   => w_SEL_Y,
