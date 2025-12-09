@@ -51,21 +51,21 @@ architecture arch_mdc_datapath of mdc_datapath is
     o_S   : out std_logic_vector(7 downto 0));
   end component;
 
-  signal w_MUX_X, w_MUX_Y, w_SUB: std_logic_vector(7 downto 0);
-  signal r_X, r_Y, r_SUB, r_D : std_logic_vector(7 downto 0) := (others => '0');
+  signal w_MUX_X, w_MUX_Y, w_SUB : std_logic_vector(7 downto 0) := (others => '0');
+  signal r_X, r_Y : std_logic_vector(7 downto 0) := (others => '0');
 
 begin
 
   u_MUX_X : mux_2x1 port map(
     i_SEL => i_SEL_X,
     i_A   => i_X,
-    i_B   => r_SUB,
+    i_B   => w_SUB,
     o_S   => w_MUX_X);
 
   u_MUX_Y : mux_2x1 port map(
     i_SEL => i_SEL_Y,
     i_A   => i_Y,
-    i_B   => r_SUB,
+    i_B   => w_SUB,
     o_S   => w_MUX_Y);
 
   u_REG_X : reg_8bit port map(
@@ -88,19 +88,12 @@ begin
     o_GT => o_GT,
     o_EQ => o_EQ,
     o_LT => o_LT);
-    
+
   u_SUBTRACTOR : subtractor port map (
     i_SEL => i_SEL_SUB,
     i_A   => r_X,
     i_B   => r_Y,
     o_S   => w_SUB);
-
-  u_REG_SUB : reg_8bit port map(
-    i_CLR_n => i_CLR_n,
-    i_CLK   => i_CLK,
-    i_ENA   => i_ENA_SUB,
-    i_Q     => w_SUB,
-    o_S     => r_SUB);
 
   u_REG_D : reg_8bit port map(
     i_CLR_n => i_CLR_n,

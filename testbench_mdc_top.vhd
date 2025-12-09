@@ -26,37 +26,55 @@ architecture tb of testbench_mdc_top is
 
 begin
 
-  u_DUT : mdc_top
-    port map(
-      i_CLR_n => w_CLR_n,
-      i_CLK   => w_CLK,
-      i_GO    => w_GO,
-      i_X     => w_X,
-      i_Y     => w_Y,
-      o_RDY   => w_RDY,
-      o_D     => w_D
-    );
+  u_DUT : mdc_top port map(
+    i_CLR_n => w_CLR_n,
+    i_CLK   => w_CLK,
+    i_GO    => w_GO,
+    i_X     => w_X,
+    i_Y     => w_Y,
+    o_RDY   => w_RDY,
+    o_D     => w_D);
 
   w_CLK <= not w_CLK after c_PERIOD/2;
-  w_CLR_n <= '0', '1' after 2*c_PERIOD;
 
-  p_INPUTS : process
+  p_INPUTS: process
   begin
-    wait for 5*c_PERIOD;
 
-    w_X <= "00000011";  -- 3
-    w_Y <= "00001001";  -- 9
+    w_CLR_n <= '0';
+    wait for c_PERIOD;
+    w_CLR_n <= '1';
+    wait for c_PERIOD;
 
+    w_X <= "00001111";
+    w_Y <= "00000011";
+    wait for c_PERIOD;
     w_GO <= '1';
-    wait until rising_edge(w_CLK);
+    wait for c_PERIOD;
     w_GO <= '0';
-
-    wait until rising_edge(w_RDY);
-
+    wait until w_RDY = '1';
     assert (w_D = "00000011") report "Falha." severity error;
 
-    assert false report "Teste concluído com sucesso!" severity note;
+    wait for 2*c_PERIOD;
 
+    w_X <= "00001000";
+    w_Y <= "00000010";
+    wait for c_PERIOD;
+    w_GO <= '1';
+    wait for c_PERIOD;
+    w_GO <= '0';
+    wait until w_RDY = '1';
+    assert (w_D = "00000010") report "Falha." severity error;
+
+    wait for 2*c_PERIOD;
+
+    w_X <= "00010000";
+    w_Y <= "00000100";
+    wait for c_PERIOD;
+    w_GO <= '1';
+    wait for c_PERIOD;
+    w_GO <= '0';
+    wait until w_RDY = '1';
+    assert (w_D = "00000100") report "Falha." severity error;
     wait;
   end process;
 

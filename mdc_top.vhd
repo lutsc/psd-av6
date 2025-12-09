@@ -48,9 +48,9 @@ architecture arch_mdc_top of mdc_top is
     o_D       : out std_logic_vector(7 downto 0));
   end component;
 
-  signal w_GT, w_EQ, w_LT : std_logic;
-  signal w_SEL_X, w_SEL_Y, w_SEL_SUB : std_logic;
-  signal w_ENA_X, w_ENA_Y, w_ENA_SUB, w_ENA_D : std_logic;
+  signal w_GT, w_EQ, w_LT : std_logic := '0';
+  signal w_SEL_X, w_SEL_Y, w_SEL_SUB : std_logic := '0';
+  signal w_ENA_X, w_ENA_Y, w_ENA_SUB, w_ENA_D : std_logic := '0';
 
 begin
 
@@ -61,13 +61,13 @@ begin
     i_GT      => w_GT,
     i_EQ      => w_EQ,
     i_LT      => w_LT,
-    o_SEL_X   => w_SEL_X,
-    o_SEL_Y   => w_SEL_Y,
-    o_SEL_SUB => w_SEL_SUB,
     o_ENA_X   => w_ENA_X,
     o_ENA_Y   => w_ENA_Y,
     o_ENA_SUB => w_ENA_SUB,
     o_ENA_D   => w_ENA_D,
+    o_SEL_X   => w_SEL_X,
+    o_SEL_Y   => w_SEL_Y,
+    o_SEL_SUB => w_SEL_SUB,
     o_RDY     => o_RDY);
 
   u_DATAPATH : mdc_datapath port map(
